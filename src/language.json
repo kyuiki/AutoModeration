@@ -1,0 +1,100 @@
+{
+  "client": {
+    "status": "Affiliated with MCAnimID | prefix \"/\""
+  },
+  "commands": {
+    "no_perms": "Kamu tidak punya izin untuk melakukan itu kamu harus minimal mempunyai %$1 untuk menggunakannya",
+    "unusable": "perintah tidak dapat di jalankan karena sudah tidak bisa digunakan",
+    "nsfw": "Aku tidak diizinkan kirim nsfw disini!",
+    "guild_only": "Aku tidak bisa menjalankan ini di dalam DM / Direct message",
+    "owner_only": "Hanya Pemilik ku yang dapat menjalankan bot ini",
+    "need_arguments": [
+      "Untuk menjalan kan perintah ini. kamu membutuhkan argumen\n",
+      "yang seharusnya seperti ini ``%$1``"
+    ],
+    "cooldown": "Harap tunggu %$1 detik untuk menjalankan perintah ini lagi",
+    "error": "Terjadi kesalahan. Jika kesalahan masih terulang, harap lapor ke pemilik kode ini\n**Kode Ini Baru saja Di Migrasi! Jadi Wajar Jika ada Kesalahan! Harap Lapor ke Pemilik Kode Ini!**"
+  },
+  "interactions": {
+    "no_perms": "Kamu tidak punya izin untuk melakukan itu kamu harus minimal mempunyai %$1 untuk menggunakannya",
+    "unusable": "perintah tidak dapat di jalankan karena sudah tidak bisa digunakan",
+    "nsfw": "Aku tidak diizinkan kirim nsfw disini!",
+    "guild_only": "Aku tidak bisa menjalankan ini di dalam DM / Direct message",
+    "owner_only": "Hanya Pemilik ku yang dapat menjalankan bot ini",
+    "need_arguments": [
+      "Untuk menjalan kan perintah ini. kamu membutuhkan argumen\n",
+      "yang seharusnya seperti ini ``%$1``"
+    ],
+    "cooldown": "Harap tunggu %$1 detik untuk menjalankan perintah ini lagi",
+    "error": "Terjadi kesalahan. Jika kesalahan masih terulang, harap lapor ke pemilik kode ini\n**Kode Ini Baru saja Di Migrasi! Jadi Wajar Jika ada Kesalahan! Harap Lapor ke Pemilik Kode Ini!**"
+  },
+  "banner": {
+    "member": "+ MEMBERS"
+  },
+  "welcome_banner": {
+    "header": "Selamat datang",
+    "footer": "Jangan lupa baca rules yah! xD"
+  },
+  "goodbye_msg": {
+    "normal": "%$1 A.K.A %$2 Keluar dari server.\nTerima kasih telah bergabung. kami berharap kamu kembali :D",
+    "banned": "Oops, %$1 telah di ban dari server, aku harap dia tidak mengulangi perbuatannya lagi.",
+    "has_torture": "",
+    "left_too_fast": "Psstt, %$1 keluar terlalu cepat! Sepertinya ini perpisahan kita "
+  },
+  "direct_msg": {
+    "left_too_fast": "Kamu keluar server terlalu cepat!\nHarap bergabung ke server ini jika anda tidak melakukan kesalahan apa apa"
+  },
+  "badword_response": {
+    "badword": ["🤔 ok?"],
+    "animalword": [
+      "😗 Gunakan **hewan** kalau membahas hewan yah... Psssttt..."
+    ],
+    "sepi": [
+      "STOPPPP Astaga Kalian ini gelud gara gara Vote!",
+      "Jangan Bahas itu Pls Stop :( Nanti ada Korban jiwa",
+      "Stop. Just Stop. Demi Kenyamanan"
+    ]
+  },
+  "commands_response": {
+    "torture": {
+      "success": "Perintah berhasil dilaksanakan!",
+      "not_allowed": "Pssstt, Kamu tidak boleh menggunakan command / kepada sesamamu atau diatas mu!"
+    },
+    "delete": {
+      "success": "Berhasil menghapus %$1 Pesan!",
+      "too_many": "Tidak dapat menghapus pesan! %$1 terlalu banyak! maksimal 99!",
+      "too_small": "Anda tidak dapat memasukan angka dibawah 1! %$1 sangat kecil!",
+      "NaN": "tolong masukan angka!"
+    },
+    "help": {
+      "description": "Ini adalah daftar dari perintah saya.",
+      "list": "**Daftar Perintah**",
+      "info": "Kamu dapat melihat info dari command tersebut dengan cara ``%$1help <command Name>``",
+      "not_valid": "Perintah tidak valid! kami tidak dapat menemukan perintah tersebut"
+    },
+    "prison": {
+      "success": [
+        "**%$1 Dimasukan kedalam penjara!**",
+        "**Telah dibebaskan %$1 dari penjara!**"
+      ],
+      "not_allowed": "**Kamu tidak boleh melakukan itu kepada dirimu sendiri / sesama mu! :(**"
+    },
+    "slap": {
+      "reply": [
+        "**PLAKK!!1!**",
+        "**ciatttt PLAKKK!!**",
+        "Ditampar dan pingsan :v"
+      ],
+      "yourself": [
+        "Masa Tampar diri sendiri sih?",
+        "Gak mau!!",
+        "Ih males tampar diri sendiri >:("
+      ]
+    },
+    "reverseImage": {
+      "no_attach": "Tolong untuk memasukan URL / Attachment yang valid",
+      "too_many": "Maximal untuk hasil pencarian tidak boleh lebih dari 3!"
+    }
+  },
+  "translator": ["QkieMauln", "MaxWell"]
+}

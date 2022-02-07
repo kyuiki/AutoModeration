@@ -1,0 +1,186 @@
+{
+  "words": {
+    "evil": {
+      "list": [
+        "(k|ng|q)+[oui03e]*n+t+[ou3ei0]*[li]+\\b",
+        "m+[e3]+m+[e3]+(k|q)+",
+        "\\bn*g*[e3]*n+t+[o3e0]+u?(d|t)+",
+        "g+[oue30]*[m]*b+l+[oue30]*[kg]+",
+        "t+[ou0e3]+l+[ou0e3]+l+",
+        "b+[e3]+g+[oe03]+\\b",
+        "\\bt+[o03e]+[dt]+\\b",
+        "(b|v)+[a4]*n*g+[sc]+[a4]*(d|t)+",
+        "(b|v)+r+[e3]+n+g+[s5c]+[e3]+k+",
+        "j+[a4]*n+c+h*[ou03e]*k+",
+        "[bv]+[a4]+j+[i1]+n+[g9]+",
+        "b+u+j+[a4]+n+[k]+\\b"
+      ],
+      "short": [
+        "kontol",
+        "memek",
+        "ngentot",
+        "goblok",
+        "tolol",
+        "bego",
+        "tod",
+        "bangsat",
+        "brengsek",
+        "jancok",
+        "bajing",
+        "bujank"
+      ]
+    },
+    "sexual": {
+      "list": [
+        "j+[e3u]+m+b+[ou0e3]+(d|t)+",
+        "n+g+[e3]+w+[e|3]+",
+        "t+[3ei]+m+p+[i1e]+(k|q)+",
+        "l+[o03eu]+n+t+[e3]+\\b",
+        "\\bv+[4a]+g+[1i]+n+[a4]+",
+        "\\bc+[o0e3]+(m+)?l+[a4]*(i|1|y)+\\b",
+        "\\bp+[3e]+n+[i1]+s+",
+        "t+[i1y]+t+[i1y]+(t|d)+",
+        "p+[a4]+[nm]+t+[4a]+[td]+",
+        "p+[4a]+y+u+d+[4a]+r+(4|a)",
+        "t+[o0ue3]+k+[e3]+(t|d)+",
+        "p+[3e]+p+[e3]+k+",
+        "t+[e3]+t+[e3]+k*\\b",
+        "\\b(p|v)+[e3]+[li]+[e3]+r+",
+        "((p+u+)|(m+[e3]+))k+[i1y]+",
+        "(p|v)+[a4]+[nm]+t+[e3]+[kq]"
+      ],
+      "short": [
+        "jembut",
+        "ngewe",
+        "tempek",
+        "lonte",
+        "vagina",
+        "coli",
+        "penis",
+        "titid",
+        "pantat",
+        "payudara",
+        "toket",
+        "pepek",
+        "tetek",
+        "peler",
+        "puki/meki",
+        "panted"
+      ]
+    },
+    "horny": {
+      "list": [
+        "\\bc+r+o+(t|d)+",
+        "h+[o0]+[0oe3]*[rw]+[nm]+[yi1]+",
+        "l+[e3]+w+d+",
+        "\\b[s5c]*[a4]+(([nm]+[g9]+[3e]+)|([g9]+[nm]+[e3]+))(h|[4a]+n+)?\\b",
+        "p+[e3]+d*j+u+\\b",
+        "\\by+[1i]+[fp]+"
+      ],
+      "short": ["crot", "horny", "lewd", "sange", "peju", "yiff"]
+    },
+    "japanese_sex": {
+      "list": [
+        "h+[e3]+n+t+[a4]+(i|1)+",
+        "\\bo+p+p+a+i+",
+        "\\b(l|i)+[0o]+[li]+[i1!y]+(c+[0o]+n+)?\\b",
+        "[e3]+c+h+[i1]+",
+        "(a|4)+h+[3e]+g+[4a]+[0o]+",
+        "y+[a4]+[o0]+[i1]+",
+        "d+[0ou]+j+[i1]+n+"
+      ],
+      "short": [
+        "hentai",
+        "oppai",
+        "lolicon",
+        "ecchi",
+        "ahegao",
+        "yaoi",
+        "doujin"
+      ]
+    },
+    "lgbtq": {
+      "list": [
+        "(l)+[e3]+[s5c]+b+[i1]+([a4]+[nm]+)?",
+        "\\bg+h*[ae43]+[yi1]+\\b"
+      ],
+      "short": ["lesbian", "gay"]
+    },
+    "sex_action": {
+      "list": [
+        "p+[e3]+r+k+[oe30]+[sc5]+[a4]+",
+        "p+[o0]+[o0e3]*r+[nm]+((o|0)+)?\\b",
+        "(s|5|c)+[ou0]+d+[ou0]+(k|q)+",
+        "[a4]+n+[a4]+l+\\b",
+        "[s5]+[o0e3]+d+[o0e3]+(m|rn)+[i1]+",
+        "\\b(s|5)+[e3]+(x+|k+s+)\\b"
+      ],
+      "short": ["perkosa", "porn", "sodok", "anal", "sodomi", "sex"]
+    },
+    "swears": {
+      "list": [
+        "(m+[a04o]+t+h+([a4]+|[e3]+r+))?f+[uav]+c+k+",
+        "\\bb+[i1e]+t+c+h+",
+        "d+[i1]+c+k+",
+        "p+u+[s5]+[s5]+y+",
+        "\\bc+u+n+t+\\b",
+        "\\b[a4]+s+h+[0o]+[li]+[e3]+",
+        "\\b[s5]+h+[1i]+t\\b",
+        "\\bf+[a4]+[9g]+([0o]+t+)?",
+        "r+[e3]+t+[4a]+r+d+([3e]+d+)?"
+      ],
+      "short": [
+        "fuck",
+        "bitch",
+        "dick",
+        "pussy",
+        "cunt",
+        "asshole",
+        "shit",
+        "faggot",
+        "retard"
+      ]
+    },
+    "animal": {
+      "list": [
+        "\\b(a|4)+[nm]+j+\\b",
+        "\\b(a|4)+j+g+\\b",
+        "\\b(a|4)+s+(u|w)+\\b",
+        "\\b((a|4)+n+[yj]+|[a4]+n+j+)([i1e3]+n+)?(g|k)+\\b",
+        "b+[a4]+b+[i1]+\\b",
+        "m*[o0u]*n+y+[e3]+(t|d)+\\b",
+        "k+[a4]+m+p+r+[e3]+(d|t)"
+      ],
+      "short": ["anj", "asu", "anjing", "babi", "monyet", "kampret"]
+    },
+    "racism": {
+      "list": ["\\bn+[1i]+[bg]+[bg]+[ae34]+r*"],
+      "short": ["nigger"]
+    },
+    "emoji": {
+      "config": "((\ud83c\udf46\ud83d\udca6)|(\ud83d\udca6\ud83c\udf46)|(👉👌)|(👌👈)|(🖕|🍑))",
+      "list": ["banned_emoji\\d{4}"],
+      "short": ["banned_emoji"]
+    },
+    "other": {
+      "list": [
+        "\\bb+[a4]*c+[o0ue3]*(t|d)+\\b",
+        "h+[e3u]+n+c+[e3u]+t+",
+        "\\b(m+[a4]+)?m+[vp]+[u0o3e]+(s|d)+\\b",
+        "j+[a4]+b+l+[a4]+y+",
+        "\\bc+[o0u]+[e3]*[kg]+\\b",
+        "\\b[kq]+[i1y]*(m+|rn)[a4]+[kq]+\\b",
+        "k+[eu3]+n+t+h?u+\\b"
+      ],
+      "short": [
+        "bacot",
+        "heunceut",
+        "mampus",
+        "jablay",
+        "cok",
+        "kimak",
+        "kenthu"
+      ]
+    }
+  }
+}
