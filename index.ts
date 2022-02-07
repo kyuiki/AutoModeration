@@ -2,6 +2,8 @@ import * as discord from "discord.js";
 import events from "./src/events";
 import log4 from "./src/functions/log4";
 
+require("dotenv").config();
+
 log4.info("Starting the bot...");
 
 const client = new discord.Client({
@@ -33,8 +35,7 @@ const client = new discord.Client({
 events(client);
 
 process.on("uncaughtException", (e) => {
-  console.log(e);
+  log4.error(e);
 });
-
-// client.login("OTI5NzYxNzA1ODA0ODQ1MTA2.YdsCEA.gE4qMoSdSi21mXlXE-jm6HVb1-I");
-client.login("ODgxNDc0OTQxNjE3MzI4MTM4.YStXgw.2BVuQPz0QVGlaF8_43rYf75-OgY");
+// log4.info(process.env.DISCORDTOKEN);
+client.login(process.env.DISCORDTOKEN);

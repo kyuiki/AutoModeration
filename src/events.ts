@@ -14,7 +14,7 @@ export default (client: Discord.Client) => {
     // if (message.author.username == "Qky") return log4.error(message);
   });
   client.on("typingStart", (t) => {
-    let channel = t.channel as Discord.TextChannel | Discord.ThreadChannel;
-    log4.log(`*${t.guild.name} | #${channel.name} | @${t.member.displayName}`);
+    // let channel = t.channel as Discord.TextChannel | Discord.ThreadChannel;
+    // log4.log(`*${t.guild.name} | #${channel.name} | @${t.member.displayName}`);
   });
 };
