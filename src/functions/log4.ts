@@ -4,10 +4,12 @@ import * as Discord from "discord.js";
 require("dotenv-flow").config();
 
 const whlogging = process.env["WEBHOOKLOG"]?.split("/");
-const webhook = new Discord.WebhookClient({
-  id: whlogging[0],
-  token: whlogging[1],
-});
+const webhook = whlogging
+  ? new Discord.WebhookClient({
+      id: whlogging[0],
+      token: whlogging[1],
+    })
+  : null;
 class Logging {
   /**
    * for Error Message (Red)
@@ -46,7 +48,7 @@ class Logging {
   }
   private sendConsole(color: string, type: string, ...message) {
     let log = c.gray(
-      `${c[`bg${color}`]("Log4J")}[${this.date()} ${c[color.toLowerCase()](
+      `${c[`bg${color}`]("  ")}[${this.date()} ${c[color.toLowerCase()](
         type
       )}]:`
     );
@@ -55,11 +57,14 @@ class Logging {
       log,
       ...message.map((x) => (typeof x === "string" ? c.gray(x) : x))
     );
-    if (message.filter((x) => !["string", "number"].includes(typeof x)).length)
+    if (
+      !webhook ||
+      message.filter((x) => !["string", "number"].includes(typeof x)).length
+    )
       return;
     webhook.send({
-      content: logClean + message.join(" "),
-
+      content: logClean + `\`\`${message.join(" ")}\`\``,
+      threadId: whlogging[2] ?? null,
       // allowed_mentions: { parse: [] },
     });
   }

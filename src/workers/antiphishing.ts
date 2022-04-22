@@ -46,10 +46,8 @@ export default async (client: Discord.Client, message: Discord.Message) => {
   const getUrlsHashed = getUrls?.map((x) => {
     return crypto.createHash("sha256").update(x).digest("hex");
   });
-  if (!getUrls) return;
-  getUrlsHashed.forEach((url) => {
-    if (domainList.includes(url)) {
-      log4.success("Suspicious Link Detected! Running next execution");
+
+  const banCompromised = () => {
       message.react("💥");
 
       if (!message.member.bannable) {
@@ -78,39 +76,42 @@ export default async (client: Discord.Client, message: Discord.Message) => {
           message.react("❌");
           // log4.error(e);
         });
+    },
+    TimeoutCompromised = () => {
+      message.react("💥");
+      message.member
+        .timeout(
+          ms("21d"),
+          `Timeouted Automatically by System (Compromised Account)`
+        )
+        .then(() => {
+          log4.success(
+            `Successfully Timeout-ed compromised account (${message.author.tag} / ${message.author.id})`
+          );
+          message.delete().catch(() => {
+            log4.error("Message Already Deleted!");
+          });
+        })
+        .catch((e) => {
+          log4.error(
+            `Failed to timeout compromised account (${message.author.tag} / ${message.author.id}). My perms might not high enough or it was the owner of the server`
+          );
+          message.react("❌");
+          // log4.error(e);
+        });
+    };
+
+  if (!getUrls) return;
+  getUrlsHashed.forEach((url) => {
+    if (domainList.includes(url)) {
+      log4.success("Suspicious Link Detected! Running next execution");
+      banCompromised();
     }
   });
   getUrls.forEach((url) => {
     if (badDomainList.includes(url)) {
       log4.success("Suspicious Link Detected! Running next execution");
-      message.react("💥");
-
-      if (!message.member.bannable) {
-        log4.error(
-          `Failed to ban compromised account (${message.author.tag} / ${message.author.id}). My perms might not high enough or it was the owner of the server`
-        );
-        return message.react("❌");
-      }
-      message.guild.bans
-        .create(message.member, {
-          days: 7,
-          reason: `Banned Automatically by System (Compromised Account)`,
-        })
-        .then(() => {
-          log4.success(
-            `Successfully banned compromised account (${message.author.tag} / ${message.author.id})`
-          );
-          message.delete().catch(() => {
-            log4.error("Message Already Deleted!");
-          });
-        })
-        .catch((e) => {
-          log4.error(
-            `Failed to ban compromised account (${message.author.tag} / ${message.author.id}). My perms might not high enough or it was the owner of the server`
-          );
-          message.react("❌");
-          // log4.error(e);
-        });
+      banCompromised();
     }
   });
   for (const embed of embedsList) {
@@ -118,54 +119,14 @@ export default async (client: Discord.Client, message: Discord.Message) => {
     if (x && x.toLowerCase().includes(embed.toLowerCase())) {
       if (getUrls.includes("discord.com")) break;
       log4.success("Suspicious Embed Terms Detected! Running next execution");
-      message.react("💥");
-      message.member
-        .timeout(
-          ms("21d"),
-          `Timeouted Automatically by System (Compromised Account)`
-        )
-        .then(() => {
-          log4.success(
-            `Successfully Timeout-ed compromised account (${message.author.tag} / ${message.author.id})`
-          );
-          message.delete().catch(() => {
-            log4.error("Message Already Deleted!");
-          });
-        })
-        .catch((e) => {
-          log4.error(
-            `Failed to timeout compromised account (${message.author.tag} / ${message.author.id}). My perms might not high enough or it was the owner of the server`
-          );
-          message.react("❌");
-          // log4.error(e);
-        });
+      TimeoutCompromised();
       break;
     }
   }
   for (const term of termsList) {
     if (message.cleanContent.includes(term)) {
       log4.success("Suspicious Words Terms Detected! Running next execution");
-      message.react("💥");
-      message.member
-        .timeout(
-          ms("21d"),
-          `Timeouted Automatically by System (Compromised Account)`
-        )
-        .then(() => {
-          log4.success(
-            `Successfully Timeout-ed compromised account (${message.author.tag} / ${message.author.id})`
-          );
-          message.delete().catch(() => {
-            log4.error("Message Already Deleted!");
-          });
-        })
-        .catch((e) => {
-          log4.error(
-            `Failed to timeout compromised account (${message.author.tag} / ${message.author.id}). My perms might not high enough or it was the owner of the server`
-          );
-          message.react("❌");
-          // log4.error(e);
-        });
+      TimeoutCompromised();
       break;
     }
   }

@@ -3,6 +3,10 @@ import * as Discord from "discord.js";
 const initial = {
   name: "ban",
   alias: ["b"],
+  details: {
+    description: "Ban user (You can ban user without user being in the server)",
+    supported: [""],
+  },
   needPerms: {
     bool: true,
     permission: ["BAN_MEMBERS"],

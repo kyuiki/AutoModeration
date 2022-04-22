@@ -1,6 +1,5 @@
 import * as Discord from "discord.js";
 import process = require("process");
-import log4 from "../functions/log4";
 import * as ts from "typescript";
 
 const initial = {

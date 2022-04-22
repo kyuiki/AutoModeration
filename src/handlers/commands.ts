@@ -3,32 +3,26 @@ import * as ms from "ms";
 import * as fs from "fs";
 import log4 from "../functions/log4";
 
-const [pref, owner, lang] = [
-  "~",
-  ["859853852441706567", "571151208299888640"],
-  require("../language.json"),
-];
+const [pref, owner, lang] = ["~>", ["859853852441706567", "571151208299888640"], require("../language.json")];
 
 interface argumentParsed {
   id: string | void;
   time: number | void;
   total: number | void;
   onlyBot: boolean | void;
+  url: string | void;
   text: string | void;
 }
 
 const commands = new Discord.Collection(),
-  commandFiles: any = fs
-    .readdirSync("./src/commands")
-    .filter((file) => file.endsWith(".ts"));
+  commandFiles: any = fs.readdirSync("./src/commands").filter((file) => file.endsWith(".ts"));
 for (const file of commandFiles) {
   const command: any = require(`../commands/${file}`);
   commands.set(command.default.initial.name, command.default);
 }
 
 export default async (client: Discord.Client, message: any) => {
-  if (!message.content.toLowerCase().startsWith(pref) || message.author.bot)
-    return;
+  if (!message.content.toLowerCase().startsWith(pref) || message.author.bot) return;
   const args: string[] = message.content.slice(pref.length).split(/ +/),
     getStrings: string = message.content.match(/`+(.*?)`+/g)?.[0];
   const commandName: string = args.shift().toLowerCase();
@@ -37,10 +31,13 @@ export default async (client: Discord.Client, message: any) => {
     time: null,
     total: null,
     onlyBot: null,
-    text: null,
+    url: null,
+    text: null
   };
-  // console.log(message.mentions);
+  // Get the string :3
   if (getStrings) argsParsed.text = getStrings.replace(/`/g, "");
+  // Get the url from attachment
+  if (message.attachments?.first()) argsParsed.url = message.attachments.first().url;
   args.forEach((a) => {
     // argsParsed = {
     //   id: /^\d{10,}\b/.test(a)
@@ -51,20 +48,27 @@ export default async (client: Discord.Client, message: any) => {
     //   time: /^(\d+(s|m|h|d))\b/i.test(a) ? ms(a) : null,
     //   total: /^\d{1,3}\b/.test(a) ? parseInt(a) : null,
     // };
+
+    // Ignore if this in the Strings
     if (getStrings?.includes(a)) return;
+    // Get the ID of anything
     if (/^\d{10,}\b/.test(a)) {
       return (argsParsed.id = a);
     }
+    // Get the Time like 2d 50m 69s
     if (/^(\d+(s|m|h|d))\b/i.test(a)) return (argsParsed.time = ms(a));
+    // Total? like the bulk message total
     if (/^\d{1,3}\b/.test(a)) return (argsParsed.total = parseInt(a));
-    if (/^!?(b|bot)\b/.test(a))
-      return (argsParsed.onlyBot = !a.startsWith("!"));
+    // If its a bot the its a bot
+    if (/^!?(b|bot)\b/.test(a)) return (argsParsed.onlyBot = !a.startsWith("!"));
+    // Get the url (might replace the url from attachment)
+    if (/(http|https):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])/.test(a))
+      argsParsed.url = a;
+    // Mention the user (Might replace the ID from ID)
     if (message.mentions.users.size > 0) {
       return (argsParsed.id = message.mentions.users.first().id);
-    } else if (
-      /^(fr|reply|fromreply)\b/i.test(a) &&
-      message.mentions.repliedUser?.id
-    ) {
+      // Get the user ID from reply instead xD
+    } else if (/^(fr|reply|fromreply)\b/i.test(a) && message.mentions.repliedUser?.id) {
       return (argsParsed.id = message.mentions.repliedUser.id);
     }
     // return "!";
@@ -73,17 +77,12 @@ export default async (client: Discord.Client, message: any) => {
 
   const command: any =
     commands.get(commandName) ||
-    commands.find(
-      (cmd: any) => cmd.initial.alias && cmd.initial.alias.includes(commandName)
-    );
+    commands.find((cmd: any) => cmd.initial.alias && cmd.initial.alias.includes(commandName));
   if (!command) return;
   // if(true) return console.log("CMD runned but nothing is runned")
 
   //checking the commands is unusable
-  if (
-    command.initial.needPerms.bool &&
-    !message.member.permissions.has(command.initial.needPerms.permission)
-  ) {
+  if (command.initial.needPerms.bool && !message.member.permissions.has(command.initial.needPerms.permission)) {
     if (!owner.includes(message.author.id)) return;
     /*message.channel.send(
         lang["commands"].no_perms.replace(
@@ -114,7 +113,10 @@ export default async (client: Discord.Client, message: any) => {
 
   try {
     // msg.channel.startTyping();
-    await command.execute(client, message, { array: args, parsed: argsParsed });
+    return await command.execute(client, message, {
+      array: args,
+      parsed: argsParsed
+    });
     // msg.channel.stopTyping();
   } catch (err) {
     log4.error(`error! ${err}`);
