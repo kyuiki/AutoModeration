@@ -3,7 +3,7 @@ import * as ms from "ms";
 import * as fs from "fs";
 import log4 from "../functions/log4";
 
-const [pref, owner, lang] = ["~>", ["859853852441706567", "571151208299888640"], require("../language.json")];
+const [pref, owner] = ["~", ["859853852441706567", "571151208299888640", "749096315027193909"]];
 
 interface argumentParsed {
   id: string | void;
@@ -22,8 +22,8 @@ for (const file of commandFiles) {
 }
 
 export default async (client: Discord.Client, message: any) => {
-  if (!message.content.toLowerCase().startsWith(pref) || message.author.bot) return;
-  const args: string[] = message.content.slice(pref.length).split(/ +/),
+  if (!message.content.toLowerCase().endsWith(pref) || message.author.bot) return;
+  const args: string[] = message.content.slice(0, -pref.length).split(/ +/),
     getStrings: string = message.content.match(/`+(.*?)`+/g)?.[0];
   const commandName: string = args.shift().toLowerCase();
   let argsParsed: argumentParsed = {
@@ -57,9 +57,9 @@ export default async (client: Discord.Client, message: any) => {
     }
     // Get the Time like 2d 50m 69s
     if (/^(\d+(s|m|h|d))\b/i.test(a)) return (argsParsed.time = ms(a));
-    // Total? like the bulk message total
+    // Total? like the bulk message total (1 -999)
     if (/^\d{1,3}\b/.test(a)) return (argsParsed.total = parseInt(a));
-    // If its a bot the its a bot
+    // If its a bot then its a bot (bot)
     if (/^!?(b|bot)\b/.test(a)) return (argsParsed.onlyBot = !a.startsWith("!"));
     // Get the url (might replace the url from attachment)
     if (/(http|https):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])/.test(a))
@@ -68,7 +68,7 @@ export default async (client: Discord.Client, message: any) => {
     if (message.mentions.users.size > 0) {
       return (argsParsed.id = message.mentions.users.first().id);
       // Get the user ID from reply instead xD
-    } else if (/^(fr|reply|fromreply)\b/i.test(a) && message.mentions.repliedUser?.id) {
+    } else if (/^(fr|reply|fromreply|guy|person|user)\b/i.test(a) && message.mentions.repliedUser?.id) {
       return (argsParsed.id = message.mentions.repliedUser.id);
     }
     // return "!";
@@ -103,13 +103,13 @@ export default async (client: Discord.Client, message: any) => {
     // message.channel.send(lang["commands"].unusable);
   }
   //checking the commands if they have arguments in it
-  if (command.initial.args && !args.length) {
-    let reply: string = lang["commands"].need_arguments[0];
-    if (command.initial.usage && lang["commands"].need_arguments[1]) {
-      reply += lang["commands"].need_arguments[1];
-    }
-    return message.channel.send(reply);
-  }
+  // if (command.initial.args && !args.length) {
+  //   let reply: string = lang["commands"].need_arguments[0];
+  //   if (command.initial.usage && lang["commands"].need_arguments[1]) {
+  //     reply += lang["commands"].need_arguments[1];
+  //   }
+  //   return message.channel.send(reply);
+  // }
 
   try {
     // msg.channel.startTyping();
