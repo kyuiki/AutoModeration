@@ -4,7 +4,7 @@ import log4 from "../functions/log4";
 
 const initial = {
   name: "qkyluvyip",
-  alias: ["qly"],
+  alias: ["qly", "qkyloveyou"],
   needPerms: {
     bool: false,
     permission: ["CHANGE_NICKNAME"]
@@ -14,9 +14,9 @@ const initial = {
 export default {
   initial,
   execute: (client: Discord.Client, message: Discord.Message) => {
-    if (message.guild.id != "956877285754015804") return;
+    if (message.guild.id != "966960365965541406") return;
     message.react("☑");
-    fetch("https://yiff.qky.life/api/getyiff/database").then(async (r) => {
+    fetch("http://localhost:3031/api/yiff/database").then(async (r) => {
       if (!r.ok) return message.reply("Qky website down! cant get the thing!");
       const result = await r.json();
       message.channel.send({
