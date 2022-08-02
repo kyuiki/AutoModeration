@@ -5,7 +5,7 @@ export default {
   initial: {
     guildID: "956877285754015804"
   },
-  async exec(client: Discord.Client, member: Discord.GuildMember) {
+  async ["guildMemberAdd"](client: Discord.Client, member: Discord.GuildMember) {
     const thisMember: Discord.GuildMember | boolean = await client.guilds.cache
       .get("368769930029563906")
       .members.fetch(member.user.id)
