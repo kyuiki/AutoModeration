@@ -38,6 +38,9 @@ fetch(
   log4.success(`The bad terms is ready!`);
 });
 
+/**
+ * Anti-Phishing Module
+ */
 export default async (client: Discord.Client, message: Discord.Message) => {
   // log4.error("Get ya!", domainList);
   const getUrls = message.cleanContent.match(
