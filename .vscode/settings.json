@@ -1,4 +1,4 @@
 {
   "deepscan.enable": true,
-  "discord.enabled": true
+  "discord.enabled": false
 }
