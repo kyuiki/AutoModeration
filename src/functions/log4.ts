@@ -52,7 +52,7 @@ class Logging {
         type
       )}]:`
     );
-    let logClean = log.replace(/\[.{2}m/gi, "").replace("Log4J", "");
+    let logClean = log//.replace(/\[.{2}m/gi, "").replace("Log4J", "");
     console.log(
       log,
       ...message.map((x) => (typeof x === "string" ? c.gray(x) : x))
@@ -63,7 +63,7 @@ class Logging {
     )
       return;
     webhook.send({
-      content: logClean + `\`\`${message.join(" ")}\`\``,
+      content: `\`\`\`ansi\n${logClean} ${message.join(" ")}\`\`\``,
       threadId: whlogging[2] ?? null,
       // allowed_mentions: { parse: [] },
     });
