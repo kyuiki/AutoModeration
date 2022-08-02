@@ -1,6 +1,4 @@
 import * as discord from "discord.js";
-// import statusChanger from "./private/alwaysOnline";
-import statusChanger from "./private/statusChanger";
 import events from "./src/events";
 import log4 from "./src/functions/log4";
 
@@ -27,7 +25,6 @@ const client = new discord.Client({
     ]
   }
 });
-
 events(client);
 
 process.on("uncaughtException", (e) => {
@@ -35,6 +32,3 @@ process.on("uncaughtException", (e) => {
 });
 // log4.info(process.env.DISCORDTOKEN);
 client.login(process.env.DISCORDTOKEN);
-
-// statusChanger(process.env.DISCORDTOKEN);
-statusChanger();
