@@ -2,6 +2,8 @@ import * as Discord from "discord.js";
 import * as fs from "fs";
 
 import commands from "./handlers/commands";
+import buttonus from "./handlers/interactionButton";
+import modalus from "./handlers/interactionModal";
 import antiphising from "./workers/antiphishing";
 import antibadword from "./workers/antibadword";
 import log4 from "./functions/log4";
@@ -75,5 +77,12 @@ export default (client: Discord.Client) => {
     // log4.log("everything good!");
     // let channel = t.channel as Discord.TextChannel | Discord.ThreadChannel;
     // log4.log(`*${t.guild.name} | #${channel.name} | @${t.member.displayName}`);
+  });
+
+  client.on("interactionCreate", async (interact: Discord.Interaction) => {
+    modalus(client, interact);
+    buttonus(client, interact);
+    // Start the Plugin
+    plugins.get(interact.guildId)?.["interactionCreate"]?.(client, interact);
   });
 };
