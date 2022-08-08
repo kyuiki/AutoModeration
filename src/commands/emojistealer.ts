@@ -1,4 +1,5 @@
 import * as Discord from "discord.js";
+import fetch from "node-fetch";
 import log4 from "../functions/log4";
 
 const initial = {
@@ -26,7 +27,7 @@ export default {
       });
     if (!fetchResult) return;
     log4.info(fetchResult);
-    const emojiList = fetchResult?.emojis;
+    const emojiList: any = (fetchResult as any)?.emojis;
     for (let emoji of emojiList) {
       if (args.parsed.text && !emoji.name.includes(args.parsed.text)) continue;
       message.guild.emojis

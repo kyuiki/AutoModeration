@@ -1,3 +1,4 @@
+import fetch from "node-fetch";
 import * as Discord from "discord.js";
 import log4 from "../functions/log4";
 
@@ -17,7 +18,7 @@ export default {
     message.react("☑");
     fetch("http://localhost:3031/api/yiff/database").then(async (r) => {
       if (!r.ok) return message.reply("Qky website down! cant get the thing!");
-      const result = await r.json();
+      const result: any = await r.json();
       message.channel.send({
         content: `Total (showed/filtered): \`${result.total}\`, Total: \`${result.trueTotal}\`, NoDup Total: \`${
           result.trueNoDupTotal

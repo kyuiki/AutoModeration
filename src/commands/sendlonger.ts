@@ -1,3 +1,4 @@
+import fetch from "node-fetch";
 import * as Discord from "discord.js";
 import log4 from "../functions/log4";
 

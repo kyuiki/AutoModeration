@@ -1,4 +1,5 @@
 import * as Discord from "discord.js";
+import fetch from "node-fetch";
 import log4 from "../../functions/log4";
 import * as mongoose from "mongoose";
 import * as dayjs from "dayjs";
@@ -67,7 +68,7 @@ export default {
       return message.react("❓");
     }
     console.log(playerResult.status);
-    const player = await playerResult.json();
+    const player: any = await playerResult.json();
 
     // Add that mf into willies
     fetch("https://api.qky.life/api/gallery", {

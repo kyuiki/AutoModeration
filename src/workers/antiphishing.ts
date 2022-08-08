@@ -1,5 +1,6 @@
 import * as ms from "ms";
 import * as crypto from "crypto";
+import fetch from "node-fetch";
 import * as Discord from "discord.js";
 import log4 from "../functions/log4";
 
@@ -18,13 +19,13 @@ let embedsList: string[] = [
 
 fetch("https://cdn.discordapp.com/bad-domains/hashes.json").then(async (r) => {
   if (!r.ok) throw "Not Ok!";
-  domainList = await r.json();
+  domainList = (await r.json()) as string[];
   log4.success(`The bad domain is ready!`);
 });
 fetch("https://raw.githubusercontent.com/nikolaischunk/discord-phishing-links/main/domain-list.json").then(
   async (r) => {
     if (!r.ok) throw "Not Ok!";
-    badDomainList = (await r.json()).domains;
+    badDomainList = ((await r.json()) as any).domains as string[];
     log4.success(`The bad domain is ready!`);
   }
 );

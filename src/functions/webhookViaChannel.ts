@@ -36,7 +36,7 @@ export async function sendWebhookByChannel(client: any, channel: string, data: a
         body: JSON.stringify(data),
         headers: { "content-type": "application/json" }
       }).then(async (r) => {
-        if (!r.ok) return log4.error(await r.text());
+        if (!r.ok) return log4.error("uhh => ", await r.text());
         log4.success("Webhook Successfully Sended");
       });
     });

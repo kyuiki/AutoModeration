@@ -32,7 +32,7 @@ export default {
           },
           {
             name: "Feedback",
-            value: fields.getField("NoteForDev").value
+            value: fields.getField("NoteForDev").value ?? "Null"
           }
         ],
         footer: {
