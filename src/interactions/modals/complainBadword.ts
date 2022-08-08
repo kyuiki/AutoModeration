@@ -32,7 +32,7 @@ export default {
           },
           {
             name: "Feedback",
-            value: fields.getField("NoteForDev").value ?? "Null"
+            value: `We got => ${fields.getField("NoteForDev")?.value}`
           }
         ],
         footer: {
@@ -43,6 +43,7 @@ export default {
         url: "",
         color: 0x7030af
       };
+    log4.info(embedding);
     sendWebhookByChannel(client, "1006107324785643621", {
       username: "Another days with Complains...",
       embeds: [embedding]
