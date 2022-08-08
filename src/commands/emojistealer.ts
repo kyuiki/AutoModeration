@@ -1,5 +1,4 @@
 import * as Discord from "discord.js";
-import fetch from "node-fetch";
 import log4 from "../functions/log4";
 
 const initial = {
