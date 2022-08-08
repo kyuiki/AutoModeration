@@ -1,5 +1,4 @@
 import * as Discord from "discord.js";
-import fetch from "node-fetch";
 import log4 from "./log4";
 
 export async function sendWebhookByChannel(client: any, channel: string, data: any) {

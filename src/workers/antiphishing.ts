@@ -1,4 +1,3 @@
-import fetch from "node-fetch";
 import * as ms from "ms";
 import * as crypto from "crypto";
 import * as Discord from "discord.js";
