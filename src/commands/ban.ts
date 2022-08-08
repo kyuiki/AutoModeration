@@ -5,12 +5,12 @@ const initial = {
   alias: ["b"],
   details: {
     description: "Ban user (You can ban user without user being in the server)",
-    supported: [""],
+    supported: [""]
   },
   needPerms: {
     bool: true,
-    permission: ["BAN_MEMBERS"],
-  },
+    permission: ["BAN_MEMBERS"]
+  }
 };
 
 export default {
@@ -32,14 +32,14 @@ export default {
       return message.react("❌");
     message.guild.bans
       .create(member, {
-        days: 7,
-        reason: args.parsed.text ?? `Banned by Moderator ${message.author.tag}`,
+        deleteMessageDays: 7,
+        reason: args.parsed.text ?? `Banned by Moderator ${message.author.tag}`
       })
       .then(() => {
         message.react("☑");
       });
     // .kick(`Kicked by Moderator ${message.author.tag}`)
-  },
+  }
 };
 
 //!(await message.guild.members.fetch(member)).bannable

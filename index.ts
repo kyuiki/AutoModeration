@@ -7,10 +7,17 @@ require("dotenv").config();
 log4.info("Starting the bot...");
 
 const client = new discord.Client({
-  intents: ["GUILDS", "GUILD_MEMBERS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS", "GUILD_MESSAGE_TYPING"],
+  intents: [
+    discord.GatewayIntentBits.MessageContent,
+    discord.GatewayIntentBits.GuildMessages,
+    discord.GatewayIntentBits.GuildMessageReactions,
+    discord.GatewayIntentBits.GuildMembers,
+    discord.GatewayIntentBits.Guilds
+  ],
+  // intents: ["Guilds", "GuildMembers", "GuildMessages", "GuildMessageReactions", "GuildMessageTyping"],
   ws: {
     properties: {
-      $browser: "Discord Android"
+      browser: "Discord Android"
     }
   },
   presence: {
@@ -19,7 +26,7 @@ const client = new discord.Client({
     activities: [
       {
         name: "with your mother",
-        type: "COMPETING",
+        type: discord.ActivityType.Competing,
         url: "https://qky.life"
       }
     ]

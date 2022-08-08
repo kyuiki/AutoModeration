@@ -25,18 +25,18 @@ export default {
         }\`\nHash : \`${result.hash}\`${"||​||".repeat(200)}${result.url}`,
         components: [
           {
-            type: "ACTION_ROW",
+            type: Discord.ComponentType.ActionRow,
             components: [
               {
-                type: "BUTTON",
+                type: Discord.ComponentType.Button,
                 label: "Download2Local",
-                style: "PRIMARY",
+                style: Discord.ButtonStyle.Secondary,
                 customId: result.hash
               },
               {
-                type: "BUTTON",
+                type: Discord.ComponentType.Button,
                 label: "Web-Preview",
-                style: "LINK",
+                style: Discord.ButtonStyle.Link,
                 url: `https://yiff.qky.life/${result.hash}`
               }
             ]

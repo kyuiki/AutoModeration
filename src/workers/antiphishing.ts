@@ -12,7 +12,7 @@ let embedsList: string[] = [
   "You've been gifted a subscription",
   "3 months of Discord Nitro",
   "Nitro free from STEAM",
-  "Nitro for 3 Months",
+  "Nitro for 3 Months"
 ];
 
 // let domainList: string[];
@@ -22,16 +22,14 @@ fetch("https://cdn.discordapp.com/bad-domains/hashes.json").then(async (r) => {
   domainList = await r.json();
   log4.success(`The bad domain is ready!`);
 });
-fetch(
-  "https://raw.githubusercontent.com/nikolaischunk/discord-phishing-links/main/domain-list.json"
-).then(async (r) => {
-  if (!r.ok) throw "Not Ok!";
-  badDomainList = (await r.json()).domains;
-  log4.success(`The bad domain is ready!`);
-});
-fetch(
-  "https://raw.githubusercontent.com/DevSpen/scam-links/master/src/malicious-terms.txt"
-).then(async (r) => {
+fetch("https://raw.githubusercontent.com/nikolaischunk/discord-phishing-links/main/domain-list.json").then(
+  async (r) => {
+    if (!r.ok) throw "Not Ok!";
+    badDomainList = (await r.json()).domains;
+    log4.success(`The bad domain is ready!`);
+  }
+);
+fetch("https://raw.githubusercontent.com/DevSpen/scam-links/master/src/malicious-terms.txt").then(async (r) => {
   if (!r.ok) throw "Not Ok!";
   termsList = (await r.text()).split("\n");
   termsList.pop();
@@ -61,13 +59,11 @@ export default async (client: Discord.Client, message: Discord.Message) => {
       }
       message.guild.bans
         .create(message.member, {
-          days: 7,
-          reason: `Banned Automatically by System (Compromised Account)`,
+          deleteMessageDays: 7,
+          reason: `Banned Automatically by System (Compromised Account)`
         })
         .then(() => {
-          log4.success(
-            `Successfully banned compromised account (${message.author.tag} / ${message.author.id})`
-          );
+          log4.success(`Successfully banned compromised account (${message.author.tag} / ${message.author.id})`);
           message.delete().catch(() => {
             log4.error("Message Already Deleted!");
           });
@@ -83,14 +79,9 @@ export default async (client: Discord.Client, message: Discord.Message) => {
     TimeoutCompromised = () => {
       message.react("💥");
       message.member
-        .timeout(
-          ms("21d"),
-          `Timeouted Automatically by System (Compromised Account)`
-        )
+        .timeout(ms("21d"), `Timeouted Automatically by System (Compromised Account)`)
         .then(() => {
-          log4.success(
-            `Successfully Timeout-ed compromised account (${message.author.tag} / ${message.author.id})`
-          );
+          log4.success(`Successfully Timeout-ed compromised account (${message.author.tag} / ${message.author.id})`);
           message.delete().catch(() => {
             log4.error("Message Already Deleted!");
           });

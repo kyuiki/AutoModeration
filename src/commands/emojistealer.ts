@@ -31,7 +31,10 @@ export default {
     for (let emoji of emojiList) {
       if (args.parsed.text && !emoji.name.includes(args.parsed.text)) continue;
       message.guild.emojis
-        .create(`https://cdn.discordapp.com/emojis/${emoji.id}.${emoji.animated ? "gif" : "webp"}`, emoji.name)
+        .create({
+          name: emoji.name,
+          attachment: `https://cdn.discordapp.com/emojis/${emoji.id}.${emoji.animated ? "gif" : "webp"}`
+        })
         .then((x) => {
           log4.success(
             `Added ${emoji.name} (Animated:${emoji.animated}) (${emoji.id}) into this guild "${message.guild.id}"`
