@@ -1,4 +1,5 @@
 import * as Discord from "discord.js";
+import fetch from "node-fetch";
 import log4 from "./log4";
 
 export async function sendWebhookByChannel(client: any, channel: string, data: any) {
@@ -35,9 +36,11 @@ export async function sendWebhookByChannel(client: any, channel: string, data: a
         method: "POST",
         body: JSON.stringify(data),
         headers: { "content-type": "application/json" }
-      }).then(async (r) => {
-        if (!r.ok) return log4.error("uhh => ", await r.text());
-        log4.success("Webhook Successfully Sended");
-      });
+      })
+        .then(async (r) => {
+          if (!r.ok) return log4.error("uhh => ", r.status, await r.text());
+          log4.success("Webhook Successfully Sended");
+        })
+        .then((e) => log4.error(e));
     });
 }
