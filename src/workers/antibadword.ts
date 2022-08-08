@@ -31,7 +31,7 @@ export default async function (client: Discord.Client, config: any, message: Dis
     config.filterChannels?.list?.length &&
     config.filterChannels?.list?.includes(message.channel.id) !== config.filterChannels?.invert
   )
-    return; //log4.warn("This Channel is allowed");
+    return log4.warn("This Channel is allowed");
 
   var str = replaceCommon(message.content);
   // log4.log(`Quick Comparison : \n Filtered Text : ${str} \n Unfiltered Text : ${message.content}`);
@@ -111,9 +111,9 @@ export default async function (client: Discord.Client, config: any, message: Dis
 
   // The Functions
   function badwordResponse() {
-    if (config.isAdminAllowed && message.member?.permissions?.has("ADMINISTRATOR"))
+    if (config.isAdminAllowed && message.member?.permissions?.has(Discord.PermissionsBitField.Flags.Administrator))
       return console.log("Admin is allowed");
-    if (!message.member?.permissions?.has("ADMINISTRATOR")) {
+    if (!message.member?.permissions?.has(Discord.PermissionsBitField.Flags.Administrator)) {
       // if (client.qky["badword"][message.author.id])
       //   client.qky["badword"][message.author.id] += swearBadword.word.length;
       // else client.qky["badword"][message.author.id] = swearBadword.word.length;
@@ -149,59 +149,75 @@ export default async function (client: Discord.Client, config: any, message: Dis
             icon_url: message.member.user.avatarURL({
               format: "png",
               dynamic: true
-            })
+            } as Discord.ImageURLOptions)
           }
         }
       ]
     });
 
-    if (config.resendCensored) {
+    // if (config.resendCensored) {
+    const theReportButton = new Discord.ButtonBuilder()
+      .setCustomId(`reportbadword,${swearBadword.word.join("|")}`)
+      .setLabel("Complain False-Positive!")
+      .setStyle(Discord.ButtonStyle.Danger)
+      .setEmoji("⚠️" as Discord.EmojiResolvable);
+    if (false) {
       sendWebhookByChannel(client, message.channel.id, {
         username: message.member.displayName,
-        content:
-          // `[${client.qky["badword"][message.author.id]}/5] ` +
-          str
-            .replace(new RegExp(`(${swearBadword.pattern.join("|")})`, "gi"), "[Content Deleted]")
-            .replace(/(<[a@][i&]?\d+>|[a@]everyone|[a@]here)/gi, "[[Mention]]")
-            .replace(/(<\w+\d+>)/gi, "[[Emoji]]"),
+        content: str
+          .replace(new RegExp(`(${swearBadword.pattern.join("|")})`, "gi"), "[Content Deleted]")
+          .replace(/(<[a@][i&]?\d+>|[a@]everyone|[a@]here)/gi, "[[Mention]]")
+          .replace(/(<\w+\d+>)/gi, "[[Emoji]]"),
         avatar_url: message.member.user.avatarURL({
           format: "png",
           dynamic: true
-        })
+        } as Discord.ImageURLOptions)
       });
       return message.delete();
-    } else if (!config.isAdminAllowed && message.member.permissions.has("ADMINISTRATOR")) {
+    } else if (
+      !config.isAdminAllowed &&
+      message.member.permissions.has(Discord.PermissionsBitField.Flags.Administrator)
+    ) {
       message.react("⚠");
       return message.channel
-        .send(
-          (
+        .send({
+          content: (
             rndmizer(config.response.admin) ??
-            'Sorry! because of "Members Equality" you cant say the "{word}" word, and its applied to all members included Admin and Owner'
-          ).replace(/\{([\w\s']+)\}/gi, replacer)
-          // { percentage: 0.05, includeSpace: true }
-        )
+            'Sorry! because of "Members Equality" you cant say the word, and its applied to all members included Admin and Owner'
+          ).replace(/\{([\w\s']+)\}/gi, replacer),
+          components: [new Discord.ActionRowBuilder().addComponents(theReportButton)]
+        } as any)
         .then((m) => {
           setTimeout(function () {
             m.delete();
-          }, 20000);
+          }, 60000);
         });
     } else if (!config.silent) {
       message.channel
-        .send(
-          // `[${client.qky["badword"][message.author.id]}/5] ` +
-          (rndmizer(config.response.normal) ?? 'Hey {user}! You arent allowed to say "{word}"!').replace(
+        .send({
+          content: (rndmizer(config.response.normal) ?? "Hey {user}! You aren't allowed to say that!").replace(
             /\{([\w\s']+)\}/gi,
             replacer
-          )
-        )
+          ),
+          components: [new Discord.ActionRowBuilder().addComponents(theReportButton)]
+        } as any)
         .then((m) => {
           setTimeout(function () {
             m.delete();
-          }, 20000);
+          }, 60000);
         });
       return message.delete();
     } else {
-      message.delete();
+      message.channel
+        .send({
+          components: [new Discord.ActionRowBuilder().addComponents(theReportButton)]
+        } as any)
+        .then((m) => {
+          setTimeout(function () {
+            m.delete();
+          }, 60000);
+        });
+      return message.delete();
     }
   }
 }
