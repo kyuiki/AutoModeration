@@ -1,13 +1,53 @@
 import * as Discord from "discord.js";
+import fetch from "node-fetch";
+import log4 from "../../functions/log4";
 
+let blacklistedUsers: string[] = [];
 const initial = {
   name: "reportbadword",
   unavailable: false
 };
+const getBlacklist = () =>
+  fetch("https://discord.com/api/v10/channels/1006550969011687555/messages", {
+    headers: {
+      Authorization: "Bot " + process.env.DISCORDTOKEN
+    }
+  }).then(async (r) => {
+    if (!r.ok) return log4.error(await r.text());
+    const output = (await r.json())
+      .filter((x) => x.type === 0)
+      .map((x) => x.content)
+      .join(" ")
+      .split(" ");
+    blacklistedUsers = output;
+    log4.success(`The blacklisted user from report is ready!`);
+  });
+getBlacklist();
+setTimeout(getBlacklist, 5 * (60 * 1000));
 
 export default {
   initial,
   execute: (client: Discord.Client, interaction: Discord.ButtonInteraction, args) => {
+    log4.log(blacklistedUsers.includes(interaction.user.id), interaction.user.id);
+    if (blacklistedUsers.includes(interaction.user.id))
+      return interaction.reply({
+        content: "[BLACKLISTED_FROM_REPORT]!",
+        ephemeral: true,
+        components: [
+          {
+            type: Discord.ComponentType.ActionRow,
+            components: [
+              {
+                type: Discord.ComponentType.Button,
+                label: "Support Server",
+                style: Discord.ButtonStyle.Link,
+                url: "https://discord.gg/dVqm9rrgdr"
+              }
+            ]
+          }
+        ]
+      });
+
     const reportModal = new Discord.ModalBuilder()
       .setTitle("Complain about Badword Detection.")
       .setCustomId("ModalComplainBadword");
