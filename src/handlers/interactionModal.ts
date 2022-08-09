@@ -11,41 +11,44 @@ for (const file of interactFiles) {
 }
 
 export default async (client: Discord.Client, interaction: Discord.Interaction) => {
-  log4.info("Modal Isnt Passed");
+  const components = [
+    {
+      type: Discord.ComponentType.ActionRow,
+      components: [
+        {
+          type: Discord.ComponentType.Button,
+          label: "Support Server",
+          style: Discord.ButtonStyle.Link,
+          url: "https://discord.gg/dVqm9rrgdr",
+          customId: ""
+        }
+      ]
+    }
+  ];
   if (!interaction.isModalSubmit()) return;
-  log4.info("Modal Is Passed");
   const args: string[] = interaction.customId.split(/,+/);
   const interactName: string = args.shift().toLowerCase();
   const modal: any = interactProcs.get(interactName);
   if (!modal) return log4.error("No Modal?");
-  // if(true) return console.log("CMD runned but nothing is runned")
 
-  //checking the commands is unusable
   if (modal.initial["unavailable"]) {
     log4.error("unavailable modal");
-    return interaction.reply({ ephemeral: true, content: "[UNAVAILABLE]!" });
-
-    // message.channel.send(lang["commands"].unusable);
+    return interaction.reply({
+      ephemeral: true,
+      content: "[UNAVAILABLE_MODAL_INTERACTION]!",
+      components
+    });
   }
-  //checking the commands if they have arguments in it
-  // if (command.initial.args && !args.length) {
-  //   let reply: string = lang["commands"].need_arguments[0];
-  //   if (command.initial.usage && lang["commands"].need_arguments[1]) {
-  //     reply += lang["commands"].need_arguments[1];
-  //   }
-  //   return message.channel.send(reply);
-  // }
-
   try {
-    // msg.channel.startTyping();
-    log4.success("Lets a go!");
     return await modal.execute(client, interaction, args);
-    // msg.channel.stopTyping();
   } catch (err) {
     log4.error(`error! ${err}`);
     log4.error(err);
-    // msg.channel.stopTyping();
-    return interaction.reply({ ephemeral: true, content: "[ERROR_COMMAND_FAILED]!" });
+    return interaction.reply({
+      ephemeral: true,
+      content: "[ERROR_MODAL_INTERACTION_FAILED]!",
+      components
+    });
     // message.reply(`${lang["commands"].error}\n\`\`\`xl\n${err}\`\`\``);
   }
 };
