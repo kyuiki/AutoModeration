@@ -13,7 +13,7 @@ export default {
     const fields: any = interaction.fields,
       embedding: Discord.EmbedData = {
         title: "Complain Submitted!",
-        description: "About **Complain about Badword**",
+        description: `About **Complain about Badword**\n**User ID** : ${interaction.user.id}`,
         author: {
           name: "Issued by " + interaction.user.tag
         },
