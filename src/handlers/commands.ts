@@ -13,11 +13,13 @@ interface argumentParsed {
   url: string | void;
   text: string | void;
 }
+const commandsJSON = [];
 
 const commands = new Discord.Collection(),
   commandFiles: any = fs.readdirSync("./src/commands").filter((file) => file.endsWith(".ts"));
 for (const file of commandFiles) {
   const command: any = require(`../commands/${file}`);
+  commandsJSON.push(command.default.initial);
   commands.set(command.default.initial.name, command.default);
 }
 
@@ -113,10 +115,15 @@ export default async (client: Discord.Client, message: any) => {
 
   try {
     // msg.channel.startTyping();
-    return await command.execute(client, message, {
-      array: args,
-      parsed: argsParsed
-    });
+    return await command.execute(
+      client,
+      message,
+      {
+        array: args,
+        parsed: argsParsed
+      },
+      commandsJSON
+    );
     // msg.channel.stopTyping();
   } catch (err) {
     log4.error(`error! ${err}`);
