@@ -2,6 +2,8 @@ import * as Discord from "discord.js";
 import * as fs from "fs";
 import log4 from "../functions/log4";
 
+const owner = process.env.BOTOWNER?.split(",");
+
 const interactProcs = new Discord.Collection(),
   interactFiles: any = fs.readdirSync("./src/interactions/modals").filter((file) => file.endsWith(".ts"));
 for (const file of interactFiles) {
@@ -36,6 +38,13 @@ export default async (client: Discord.Client, interaction: Discord.Interaction) 
     return interaction.reply({
       ephemeral: true,
       content: "[UNAVAILABLE_MODAL_INTERACTION]!",
+      components
+    });
+  }
+  if (modal.initial.ownerOnly && !owner.includes(interaction.user.id)) {
+    return interaction.reply({
+      ephemeral: true,
+      content: "[DEV_ONLY_INTERACTION]!",
       components
     });
   }

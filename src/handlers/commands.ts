@@ -3,7 +3,7 @@ import * as ms from "ms";
 import * as fs from "fs";
 import log4 from "../functions/log4";
 
-const [pref, owner] = ["~", ["859853852441706567", "571151208299888640", "749096315027193909"]];
+const [pref, owner] = ["~", process.env.BOTOWNER?.split(",")];
 
 interface argumentParsed {
   id: string | void;
@@ -128,7 +128,7 @@ export default async (client: Discord.Client, message: any) => {
   } catch (err) {
     log4.error(`error! ${err}`);
     // msg.channel.stopTyping();
-    message.react("940204886228881438");
+    message.react("☢️");
     // message.reply(`${lang["commands"].error}\n\`\`\`xl\n${err}\`\`\``);
   }
 };
