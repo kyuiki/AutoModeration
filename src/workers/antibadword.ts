@@ -71,7 +71,7 @@ export default async function (client: Discord.Client, config: any, message: Dis
   if (config.config["sexual"]) badwords.push(...words.sexual.list);
   if (config.config["horny"]) badwords.push(...words.horny.list);
   if (config.config["japanese_sex"]) badwords.push(...words.japanese_sex.list);
-  if (config.config["lgbtq"]) badwords.push(...words.lgbtq.list);
+  // if (config.config["lgbtq"]) badwords.push(...words.lgbtq.list);
   if (config.config["sex_action"]) badwords.push(...words.sex_action.list);
   if (config.config["swears"]) badwords.push(...words.swears.list);
   // if(config.config["animal"]) badwords.push(...words.animal.list)

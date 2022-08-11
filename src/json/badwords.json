@@ -71,15 +71,8 @@
       ]
     },
     "horny": {
-      "list": [
-        "\\bc+r+o+(t|d)+",
-        "h+[o0]+[0oe3]*[rw]+[nm]+[yi1]+",
-        "l+[e3]+w+d+",
-        "\\b[s5c]*[a4]+(([nm]+[g9]+[3e]+)|([g9]+[nm]+[e3]+))(h|[4a]+n+)?\\b",
-        "p+[e3]+d*j+u+\\b",
-        "\\by+[1i]+[fp]+"
-      ],
-      "short": ["crot", "horny", "lewd", "sange", "peju", "yiff"]
+      "list": ["\\b[s5c]*[a4]+(([nm]+[g9]+[3e]+)|([g9]+[nm]+[e3]+))(h|[4a]+n+)?\\b", "p+[e3]+d*j+u+\\b"],
+      "short": ["sange", "peju"]
     },
     "japanese_sex": {
       "list": [
@@ -91,22 +84,7 @@
         "y+[a4]+[o0]+[i1]+",
         "d+[0ou]+j+[i1]+n+"
       ],
-      "short": [
-        "hentai",
-        "oppai",
-        "lolicon",
-        "ecchi",
-        "ahegao",
-        "yaoi",
-        "doujin"
-      ]
-    },
-    "lgbtq": {
-      "list": [
-        "(l)+[e3]+[s5c]+b+[i1]+([a4]+[nm]+)?",
-        "\\bg+h*[ae43]+[yi1]+\\b"
-      ],
-      "short": ["lesbian", "gay"]
+      "short": ["hentai", "oppai", "lolicon", "ecchi", "ahegao", "yaoi", "doujin"]
     },
     "sex_action": {
       "list": [
@@ -131,17 +109,7 @@
         "\\bf+[a4]+[9g]+([0o]+t+)?",
         "r+[e3]+t+[4a]+r+d+([3e]+d+)?"
       ],
-      "short": [
-        "fuck",
-        "bitch",
-        "dick",
-        "pussy",
-        "cunt",
-        "asshole",
-        "shit",
-        "faggot",
-        "retard"
-      ]
+      "short": ["fuck", "bitch", "dick", "pussy", "cunt", "asshole", "shit", "faggot", "retard"]
     },
     "animal": {
       "list": [
@@ -174,15 +142,7 @@
         "\\b[kq]+[i1y]*(m+|rn)[a4]+[kq]+\\b",
         "k+[eu3]+n+t+h?u+\\b"
       ],
-      "short": [
-        "bacot",
-        "heunceut",
-        "mampus",
-        "jablay",
-        "cok",
-        "kimak",
-        "kenthu"
-      ]
+      "short": ["bacot", "heunceut", "mampus", "jablay", "cok", "kimak", "kenthu"]
     }
   }
 }
