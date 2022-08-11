@@ -11,7 +11,7 @@ export default {
   initial,
   execute: (client: Discord.Client, interaction: Discord.ModalSubmitInteraction, args) => {
     const fields: any = interaction.fields,
-      embedding: Discord.EmbedData = {
+      embedding = {
         title: "Complain Submitted!",
         description: `About **Complain about Badword**\n**User ID** : ${interaction.user.id}`,
         author: {
@@ -37,8 +37,7 @@ export default {
         ],
         footer: {
           text: "Issued by " + interaction.user.tag,
-
-          iconURL: interaction.user.avatarURL({ dynamic: true, forceStatic: true } as Discord.ImageURLOptions)
+          icon_url: interaction.user.avatarURL()
         },
         url: "",
         color: 0x7030af
@@ -46,6 +45,7 @@ export default {
     log4.info(embedding);
     sendWebhookByChannel(client, "1006107324785643621", {
       username: "Another days with Complains...",
+      avatar_url: interaction.user.avatarURL(),
       embeds: [embedding]
     });
     interaction.reply({
