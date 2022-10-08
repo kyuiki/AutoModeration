@@ -8,7 +8,6 @@
         "g+[oue30]*[m]*b+l+[oue30]*[kg]+",
         "t+[ou0e3]+l+[ou0e3]+l+",
         "b+[e3]+g+[oe03]+\\b",
-        "\\bt+[o03e]+[dt]+\\b",
         "(b|v)+[a4]*n*g+[sc]+[a4]*(d|t)+",
         "(b|v)+r+[e3]+n+g+[s5c]+[e3]+k+",
         "j+[a4]*n+c+h*[ou03e]*k+",
@@ -22,7 +21,6 @@
         "goblok",
         "tolol",
         "bego",
-        "tod",
         "bangsat",
         "brengsek",
         "jancok",
@@ -138,11 +136,10 @@
         "h+[e3u]+n+c+[e3u]+t+",
         "\\b(m+[a4]+)?m+[vp]+[u0o3e]+(s|d)+\\b",
         "j+[a4]+b+l+[a4]+y+",
-        "\\bc+[o0u]+[e3]*[kg]+\\b",
         "\\b[kq]+[i1y]*(m+|rn)[a4]+[kq]+\\b",
         "k+[eu3]+n+t+h?u+\\b"
       ],
-      "short": ["bacot", "heunceut", "mampus", "jablay", "cok", "kimak", "kenthu"]
+      "short": ["bacot", "heunceut", "mampus", "jablay", "kimak", "kenthu"]
     }
   }
 }
